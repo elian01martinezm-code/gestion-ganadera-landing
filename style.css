@@ -15,6 +15,7 @@ body {
 /* ================================================================
    2. NAVEGACIÓN (barra superior)
    ================================================================ */
+
 nav.navegacion-landing {
     position: sticky;
     top: 0;
@@ -59,10 +60,16 @@ nav.navegacion-landing {
     align-items: center;
 }
 
+
 /* ================================================================
    3. SECCIÓN INICIO (HERO)
    ================================================================ */
+
 .seccion-inicio {
+    background-color: #F7F4EF;
+    background-image: linear-gradient( to right, rgba(247, 244, 239, 0.75) 35%, rgba(247, 244, 239, 0.10) 100%), url('../foto-fondo.png');
+    background-size: cover;
+    background-position: center;
     padding: 80px 5%;
     min-height: calc(100vh - 64px);
     display: flex;
@@ -140,7 +147,9 @@ nav.navegacion-landing {
     background: #EDE8E0;
 }
 
+
 /* --- Tarjeta de módulos (lista con emojis, dentro del hero) --- */
+
 .tarjeta-modulos {
     background: white;
     border-radius: 16px;
@@ -216,7 +225,9 @@ nav.navegacion-landing {
     border-radius: 99px;
 }
 
+
 /* Hero y tarjeta de módulos lado a lado en pantallas grandes */
+
 @media (min-width: 769px) {
     .seccion-inicio {
         display: grid;
@@ -229,6 +240,7 @@ nav.navegacion-landing {
 /* ================================================================
    4. SECCIÓN ESTADÍSTICAS (franja verde con números)
    ================================================================ */
+
 .seccion-estadisticas {
     background: #1B5E20;
     padding: 60px 5%;
@@ -274,6 +286,7 @@ nav.navegacion-landing {
 /* ================================================================
    5. SECCIÓN FUNCIONALIDADES (cuadrícula de tarjetas con íconos)
    ================================================================ */
+
 .seccion-funciones {
     padding: 100px 5%;
     max-width: 1200px;
@@ -336,6 +349,7 @@ nav.navegacion-landing {
 /* ================================================================
    6. SECCIÓN TESTIMONIOS (citas de clientes)
    ================================================================ */
+
 .seccion-testimonios {
     background: #EDE8E0;
     padding: 100px 5%;
@@ -392,6 +406,7 @@ nav.navegacion-landing {
 /* ================================================================
    7. SECCIÓN PRECIOS (planes Básico / Pro / Empresa)
    ================================================================ */
+
 .seccion-precios {
     padding: 100px 5%;
     max-width: 1200px;
@@ -479,7 +494,9 @@ nav.navegacion-landing {
     background: #EDE8E0;
 }
 
+
 /* --- Plan destacado ("Pro" en verde, con etiqueta "Más popular") --- */
+
 .tarjeta-plan.destacado {
     border: 2px solid #1B5E20;
     background: #1B5E20;
@@ -529,6 +546,7 @@ nav.navegacion-landing {
 /* ================================================================
    8. LLAMADO A LA ACCIÓN FINAL (franja verde "Empieza a gestionar")
    ================================================================ */
+
 .llamado-accion-final {
     background: #1B5E20;
     padding: 100px 5%;
@@ -571,6 +589,7 @@ nav.navegacion-landing {
 /* ================================================================
    9. PIE DE PÁGINA (FOOTER)
    ================================================================ */
+
 footer.pie-pagina-pro {
     background: #1A1A14;
     color: rgba(255, 255, 255, 0.65);
@@ -672,29 +691,25 @@ footer.pie-pagina-pro {
 /* ================================================================
    10. RESPONSIVE (MEDIA QUERIES)
    ================================================================ */
+
 @media (max-width: 768px) {
     nav.navegacion-landing .enlaces-navegacion {
         display: none;
     }
-
     .estadisticas-contenedor {
         grid-template-columns: 1fr;
     }
-
     .bloque-estadistica {
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
-
     .bloque-estadistica:last-child {
         border-bottom: none;
     }
-
     .cuadricula-testimonios {
         grid-template-columns: 1fr;
     }
-
     .cuadricula-funciones {
         grid-template-columns: 1fr;
     }
-}   
+}
