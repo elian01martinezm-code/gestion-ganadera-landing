@@ -1,0 +1,700 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #F7F4EF;
+    color: #1A1A14;
+    line-height: 1.6;
+}
+
+
+/* ================================================================
+   2. NAVEGACIÓN (barra superior)
+   ================================================================ */
+nav.navegacion-landing {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 244, 239, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0 5%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-navegacion-img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+}
+
+.enlaces-navegacion {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.enlaces-navegacion a {
+    color: #1A1A14;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.enlaces-navegacion a:hover {
+    color: #1B5E20;
+}
+
+.acciones-navegacion {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ================================================================
+   3. SECCIÓN INICIO (HERO)
+   ================================================================ */
+.seccion-inicio {
+    padding: 80px 5%;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inicio-izquierda,
+.inicio-derecha {
+    width: 100%;
+}
+
+.inicio-titulo {
+    font-family: Georgia, serif;
+    font-size: clamp(36px, 5vw, 54px);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    color: #1A1A14;
+    margin-bottom: 20px;
+}
+
+.inicio-titulo em {
+    font-style: italic;
+    color: #1B5E20;
+}
+
+.inicio-subtitulo {
+    font-size: 16px;
+    color: #4A4A40;
+    margin-bottom: 32px;
+    max-width: 540px;
+}
+
+.botones-inicio {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.boton-inicio-principal {
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 4px 14px rgba(27, 94, 32, 0.35);
+    font-weight: 500;
+    color: white;
+    background: #1B5E20;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 10px;
+    transition: background .2s, transform .15s;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-inicio-principal:hover {
+    background: #2E7D32;
+    transform: translateY(-2px);
+}
+
+.boton-inicio-secundario {
+    display: inline-block;
+    font-size: 15px;
+    color: #1A1A14;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 15px 28px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background .2s;
+    cursor: pointer;
+}
+
+.boton-inicio-secundario:hover {
+    background: #EDE8E0;
+}
+
+/* --- Tarjeta de módulos (lista con emojis, dentro del hero) --- */
+.tarjeta-modulos {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+}
+
+.encabezado-modulos {
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FAFAF8;
+}
+
+.encabezado-modulos span:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1A1A14;
+}
+
+.etiqueta-modulos {
+    font-size: 11px;
+    font-weight: bold;
+    background: #EAF3DE;
+    color: #3B6D11;
+    padding: 4px 12px;
+    border-radius: 99px;
+}
+
+.fila-modulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background .2s;
+}
+
+.fila-modulo:last-child {
+    border-bottom: none;
+}
+
+.fila-modulo:hover {
+    background: #F7F4EF;
+}
+
+.info-modulo {
+    flex: 1;
+}
+
+.nombre-modulo {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1A1A14;
+    margin-bottom: 2px;
+}
+
+.descripcion-modulo {
+    font-size: 12px;
+    color: #8A8A7A;
+}
+
+.estado-modulo {
+    font-size: 11px;
+    font-weight: bold;
+    color: #3B6D11;
+    background: #EAF3DE;
+    padding: 3px 10px;
+    border-radius: 99px;
+}
+
+/* Hero y tarjeta de módulos lado a lado en pantallas grandes */
+@media (min-width: 769px) {
+    .seccion-inicio {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 48px;
+    }
+}
+
+
+/* ================================================================
+   4. SECCIÓN ESTADÍSTICAS (franja verde con números)
+   ================================================================ */
+.seccion-estadisticas {
+    background: #1B5E20;
+    padding: 60px 5%;
+}
+
+.estadisticas-contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.bloque-estadistica {
+    padding: 20px 40px;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bloque-estadistica:last-child {
+    border-right: none;
+}
+
+.numero-estadistica {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 48px;
+    color: white;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.numero-estadistica span {
+    color: #C8E6C9;
+}
+
+.etiqueta-estadistica {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+
+/* ================================================================
+   5. SECCIÓN FUNCIONALIDADES (cuadrícula de tarjetas con íconos)
+   ================================================================ */
+.seccion-funciones {
+    padding: 100px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ceja-seccion {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1B5E20;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.titulo-seccion-landing {
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: #1A1A14;
+    margin-bottom: 48px;
+    max-width: 550px;
+}
+
+.cuadricula-funciones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.tarjeta-funcion {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .02);
+    transition: transform .2s, border-color .2s;
+}
+
+.tarjeta-funcion:hover {
+    transform: translateY(-3px);
+    border-color: rgba(27, 94, 32, 0.3);
+}
+
+.nombre-funcion {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1A1A14;
+    margin-bottom: 8px;
+}
+
+.descripcion-funcion {
+    font-size: 14px;
+    color: #4A4A40;
+    line-height: 1.6;
+}
+
+
+/* ================================================================
+   6. SECCIÓN TESTIMONIOS (citas de clientes)
+   ================================================================ */
+.seccion-testimonios {
+    background: #EDE8E0;
+    padding: 100px 5%;
+}
+
+.cuadricula-testimonios {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.cita-testimonio {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    color: #1A1A14;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.autor-testimonio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-testimonio {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1B5E20;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nombre-testimonio {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1A1A14;
+}
+
+.lugar-testimonio {
+    font-size: 12px;
+    color: #8A8A7A;
+}
+
+
+/* ================================================================
+   7. SECCIÓN PRECIOS (planes Básico / Pro / Empresa)
+   ================================================================ */
+.seccion-precios {
+    padding: 100px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cuadricula-precios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.tarjeta-plan {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 40px 32px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .04);
+    transition: transform .2s;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-plan:hover {
+    transform: translateY(-4px);
+}
+
+.nombre-plan {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8A8A7A;
+    margin-bottom: 12px;
+}
+
+.precio-plan {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    color: #1A1A14;
+    line-height: 1;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.periodo-plan {
+    font-size: 13px;
+    color: #8A8A7A;
+    margin-bottom: 24px;
+}
+
+.caracteristicas-plan {
+    list-style: none;
+    margin-bottom: 32px;
+    text-align: left;
+    flex: 1;
+}
+
+.caracteristicas-plan li {
+    font-size: 13px;
+    color: #4A4A40;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.boton-plan {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background .2s;
+}
+
+.boton-plan-esquema {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #1A1A14;
+}
+
+.boton-plan-esquema:hover {
+    background: #EDE8E0;
+}
+
+/* --- Plan destacado ("Pro" en verde, con etiqueta "Más popular") --- */
+.tarjeta-plan.destacado {
+    border: 2px solid #1B5E20;
+    background: #1B5E20;
+    color: white;
+}
+
+.plan-popular {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: bold;
+    background: #2E7D32;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 99px;
+}
+
+.tarjeta-plan.destacado .nombre-plan {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tarjeta-plan.destacado .precio-plan {
+    color: white;
+}
+
+.tarjeta-plan.destacado .periodo-plan {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tarjeta-plan.destacado .caracteristicas-plan li {
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.boton-plan-solido {
+    background: #C8E6C9;
+    color: #1B5E20;
+}
+
+.boton-plan-solido:hover {
+    background: white;
+}
+
+
+/* ================================================================
+   8. LLAMADO A LA ACCIÓN FINAL (franja verde "Empieza a gestionar")
+   ================================================================ */
+.llamado-accion-final {
+    background: #1B5E20;
+    padding: 100px 5%;
+    text-align: center;
+}
+
+.llamado-accion-final h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 5vw, 46px);
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+.llamado-accion-final p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 36px;
+}
+
+.boton-cta-blanco {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    color: #1B5E20;
+    background: white;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 10px;
+    transition: transform .15s, opacity .2s;
+}
+
+.boton-cta-blanco:hover {
+    transform: translateY(-2px);
+    opacity: .95;
+}
+
+
+/* ================================================================
+   9. PIE DE PÁGINA (FOOTER)
+   ================================================================ */
+footer.pie-pagina-pro {
+    background: #1A1A14;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+}
+
+.pie-pagina-superior {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 5% 48px;
+}
+
+.columna-pie--marca {
+    grid-column: span 1;
+}
+
+.logo-pie {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 14px;
+}
+
+.logo-pie span {
+    color: #C8E6C9;
+}
+
+.eslogan-pie {
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 24px;
+}
+
+.titulo-columna-pie {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
+.enlaces-columna-pie {
+    list-style: none;
+}
+
+.enlaces-columna-pie li {
+    margin-bottom: 12px;
+}
+
+.enlaces-columna-pie a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color .2s;
+}
+
+.enlaces-columna-pie a:hover {
+    color: white;
+}
+
+.pie-pagina-inferior {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 20px 5%;
+}
+
+.pie-pagina-inferior-interior {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.termino-copyright {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.navegacion-legal a {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.navegacion-legal a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* ================================================================
+   10. RESPONSIVE (MEDIA QUERIES)
+   ================================================================ */
+@media (max-width: 768px) {
+    nav.navegacion-landing .enlaces-navegacion {
+        display: none;
+    }
+
+    .estadisticas-contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    .bloque-estadistica {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .bloque-estadistica:last-child {
+        border-bottom: none;
+    }
+
+    .cuadricula-testimonios {
+        grid-template-columns: 1fr;
+    }
+
+    .cuadricula-funciones {
+        grid-template-columns: 1fr;
+    }
+}   
