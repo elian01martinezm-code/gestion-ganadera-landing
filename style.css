@@ -82,6 +82,36 @@ nav.navegacion-landing {
     width: 100%;
 }
 
+.boton-iniciar-sesion,
+.boton-registrarse {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background .2s;
+}
+
+.boton-iniciar-sesion {
+    color: #1A1A14;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.boton-iniciar-sesion:hover {
+    background: #EDE8E0;
+}
+
+.boton-registrarse {
+    color: white;
+    background: #1B5E20;
+}
+
+.boton-registrarse:hover {
+    background: #2E7D32;
+}
+
 .inicio-titulo {
     font-family: Georgia, serif;
     font-size: clamp(36px, 5vw, 54px);
