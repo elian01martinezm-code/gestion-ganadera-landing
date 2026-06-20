@@ -1,12 +1,11 @@
-{
-    "name": "gestion-ganadera-landing",
-    "version": "1.0.0",
-    "scripts": {
-        "build-css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
-    },
-    "devDependencies": {
-        "@tailwindcss/cli": "^4.3.1",
-        "tailwindcss": "^4.3.1"
-    },
-    "main": "tailwind.config.js"
-}
+    {
+        "name": "gestion-ganadera-landing",
+        "version": "1.0.0",
+        "scripts": {
+            "dev:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+            "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css"
+        },
+        "devDependencies": {
+            "tailwindcss": "^3.x.x"
+        }
+    }       
