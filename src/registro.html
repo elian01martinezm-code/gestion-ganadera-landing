@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Gestión Ganadera</title>
+    <link href="../dist/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center text-green-700">Crear cuenta</h2>
+        
+        <form id="registroForm" novalidate>
+            <div class="mb-4">
+                <label class="block text-gray-700">Nombre Completo</label>
+                <input type="text" id="nombre" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Correo Electrónico</label>
+                <input type="email" id="email" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700">Contraseña</label>
+                <input type="password" id="password" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            
+            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
+                Registrarse
+            </button>
+        </form>
+        <p class="mt-4 text-center text-sm text-gray-600">
+            ¿Ya tienes cuenta? <a href="login.html" class="text-green-700 font-bold">Inicia sesión</a>
+        </p>
+    </div>
+    <script>
+    document.getElementById('registroForm').addEventListener('submit', (e) => {
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        if (!nombre || !email) {
+            e.preventDefault();
+            alert('Por favor, completa todos los campos.');
+        }
+    });
+</script>
+</body>
+</html>
