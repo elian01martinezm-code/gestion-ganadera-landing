@@ -1,37 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar Sesión - Gestión Ganadera</title>
-    <link href="../dist/output.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <link href="../dist/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+      <img
+        src="imagenes/Gemini_Generated_Image_du25c5du25c5du25.png"
+        alt="Logo"
+        class="w-16 mx-auto mb-4"
+      />
+      <h2 class="text-2xl font-bold mb-6 text-center text-green-700">
+        Acceso Ganadero
+      </h2>
 
-            <div class="bg-white p-8 rounded-lg shadow-md w-96">
-    
-    <img src="imagenes/Gemini_Generated_Image_du25c5du25c5du25.png" alt="Logo" class="w-16 mx-auto mb-4">
-    <h2 class="text-2xl font-bold mb-6 text-center text-green-700">Acceso Ganadero</h2>
-    
-        <form id="loginForm" novalidate>
-            <div class="mb-4">
-                <label class="block text-gray-700">Correo Electrónico</label>
-                <input type="email" id="email" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-500 outline-none">
-                <p id="emailError" class="text-red-500 text-xs mt-1 hidden">El correo es obligatorio.</p>
-            </div>
-            
-            <div class="mb-6">
-                <label class="block text-gray-500">Contraseña</label>
-                <input type="password" id="password" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-700 outline-none">
-                <p id="passError" class="text-red-600 text-xs mt-1 hidden">La contraseña es obligatoria.</p>
-            </div>
-            
-            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
-                Entrar
-            </button>
-        </form>
+      <form id="loginForm" novalidate>
+        <div class="mb-4">
+          <label class="block text-gray-700">Correo Electrónico</label>
+          <input
+            type="email"
+            id="email"
+            class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-500 outline-none"
+          />
+          <p id="emailError" class="text-red-500 text-xs mt-1 hidden">
+            El correo es obligatorio.
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-gray-500">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-green-700 outline-none"
+          />
+          <p id="passError" class="text-red-600 text-xs mt-1 hidden">
+            La contraseña es obligatoria.
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+        >
+          Entrar
+        </button>
+      </form>
     </div>
 
-    <script src="./js/login-validation.js"></script>
-</body>
+    <script>
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("password").value;
+
+        const savedEmail = localStorage.getItem("userEmail");
+        const savedPass = localStorage.getItem("userPass");
+
+        if (email === savedEmail && pass === savedPass) {
+          alert("¡Bienvenido a Gestión Ganadera!");
+          // Aquí podrías redirigir a tu dashboard
+          window.location.href = "../index.html";
+        } else {
+          alert("Correo o contraseña incorrectos.");
+        }
+      });
+    </script>
+  </body>       
 </html>
