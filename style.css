@@ -447,9 +447,10 @@ nav.navegacion-landing {
 
 .seccion-inicio {
     background-color: #F7F4EF;
-    background-image: linear-gradient( to right, rgba(247, 244, 239, 0.75) 35%, rgba(247, 244, 239, 0.10) 100%), url('../foto-fondo.png');
+    background-image: linear-gradient(to right, rgba(247, 244, 239, 0.75) 35%, rgba(247, 244, 239, 0.10) 100%), url('./src/imagenes/foto-fondo.png');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     padding: 80px 5%;
     min-height: calc(100vh - 64px);
     display: flex;
