@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAVAC · Registro Ganadero</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="brand-row">
+      <div class="brand-mark">G</div>
+      <div class="brand-name">GAVAC <b>·</b> Sistema de Registro Ganadero</div>
+    </div>
+    <h1 class="title">Cada animal,<br><em>una chapeta</em> bajo control.</h1>
+    <p class="subtitle">Registra, filtra y da seguimiento al ganado de cada finca: estado de salud, peso y trabajador asignado, todo en un solo lugar.</p>
+
+    <div class="stats-row" id="statsRow">
+      <div class="stat"><span class="num" id="statTotal">0</span><span class="lbl">Animales</span></div>
+      <div class="stat"><span class="num" id="statFincas">0</span><span class="lbl">Fincas activas</span></div>
+      <div class="stat"><span class="num warn-color" id="statTrat">0</span><span class="lbl">En tratamiento</span></div>
+      <div class="stat"><span class="num" id="statPeso">0</span><span class="lbl">Peso promedio (kg)</span></div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Buscar por chapeta, nombre o raza...">
+    <select id="filterFinca"><option value="">Todas las fincas</option></select>
+    <select id="filterSexo">
+      <option value="">Sexo: todos</option>
+      <option value="M">Macho</option>
+      <option value="H">Hembra</option>
+    </select>
+    <select id="filterEstado">
+      <option value="">Estado: todos</option>
+      <option value="Sano">Sano</option>
+      <option value="Tratamiento">En tratamiento</option>
+      <option value="Cuarentena">Cuarentena</option>
+    </select>
+    <button class="btn btn-ghost" id="clearFiltersBtn">Limpiar</button>
+    <span class="result-count" id="resultCount">0 resultados</span>
+    <button class="btn btn-primary" id="openModalBtn">+ Registrar animal</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="emptyState" style="display:none;">
+    <div class="glyph">🐂</div>
+    <h3>Sin coincidencias</h3>
+    <p>Ningún animal cumple con esos filtros. Ajusta la búsqueda o limpia los filtros.</p>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Registrar animal</h2>
+    <p class="modal-sub">Completa la chapeta digital. Los campos marcados son obligatorios.</p>
+    <form id="animalForm">
+      <div class="field-row">
+        <div class="field" id="f-chapeta">
+          <label for="in-chapeta">N° de chapeta *</label>
+          <input type="text" id="in-chapeta" placeholder="Ej. CH-0231">
+          <span class="err-msg">Ingresa un número de chapeta.</span>
+        </div>
+        <div class="field" id="f-nombre">
+          <label for="in-nombre">Nombre / alias</label>
+          <input type="text" id="in-nombre" placeholder="Ej. Lucero">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" id="f-finca">
+          <label for="in-finca">Finca *</label>
+          <select id="in-finca">
+            <option value="">Selecciona una finca</option>
+            <option>La Esperanza</option>
+            <option>El Roble</option>
+            <option>Santa Rita</option>
+            <option>Los Naranjos</option>
+          </select>
+          <span class="err-msg">Selecciona la finca.</span>
+        </div>
+        <div class="field" id="f-raza">
+          <label for="in-raza">Raza</label>
+          <input type="text" id="in-raza" placeholder="Ej. Brahman">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" id="f-sexo">
+          <label for="in-sexo">Sexo *</label>
+          <select id="in-sexo">
+            <option value="">Selecciona</option>
+            <option value="M">Macho</option>
+            <option value="H">Hembra</option>
+          </select>
+          <span class="err-msg">Selecciona el sexo.</span>
+        </div>
+        <div class="field" id="f-peso">
+          <label for="in-peso">Peso (kg)</label>
+          <input type="number" id="in-peso" placeholder="Ej. 320" min="0">
+        </div>
+      </div>
+      <div class="field-row single">
+        <div class="field" id="f-estado">
+          <label for="in-estado">Estado de salud *</label>
+          <select id="in-estado">
+            <option value="">Selecciona</option>
+            <option value="Sano">Sano</option>
+            <option value="Tratamiento">En tratamiento</option>
+            <option value="Cuarentena">Cuarentena</option>
+          </select>
+          <span class="err-msg">Selecciona el estado de salud.</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelBtn">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar animal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Animal registrado</span></div>
+
+<script src="script.js"></script>
+</body>
+</html>

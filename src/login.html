@@ -87,8 +87,9 @@
         const savedPass = localStorage.getItem("userPass");
 
         if (email === savedEmail && pass === savedPass) {
+          localStorage.setItem("isLoggedIn", "true");
           alert("¡Bienvenido a Gestión Ganadera!");
-          window.location.href = "../index.html";
+          window.location.href = "../formulario/";
         } else {
           alert("Correo o contraseña incorrectos.");
         }
