@@ -18,6 +18,9 @@ const overlay = document.getElementById('overlay');
 const form = document.getElementById('animalForm');
 const toast = document.getElementById('toast');
 const toastMsg = document.getElementById('toastMsg');
+const voiceBtn = document.getElementById('voiceBtn');
+let recognition = null;
+let isListening = false;
 
 function refreshFincaOptions(){
   const fincas = [...new Set(animals.map(a => a.finca))].sort();
@@ -98,6 +101,152 @@ function showToast(msg){
   window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
 }
 
+function normalizeText(text){
+  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function initVoiceRecognition(){
+  if (recognition) return;
+
+  if (!(window.SpeechRecognition || window.webkitSpeechRecognition)) {
+    showToast('Tu navegador no soporta reconocimiento de voz');
+    return;
+  }
+
+  const isSecureContext = window.location.protocol === 'https:' ||
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1';
+
+  if (!isSecureContext) {
+    showToast('Abre la página con HTTPS o localhost para usar el micrófono');
+    return;
+  }
+
+  const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognitionCtor();
+  recognition.lang = 'es-ES';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.maxAlternatives = 1;
+
+  recognition.onstart = () => {
+    isListening = true;
+    voiceBtn.classList.add('is-listening');
+    voiceBtn.textContent = '⏹';
+    voiceBtn.title = 'Detener escucha';
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    voiceBtn.classList.remove('is-listening');
+    voiceBtn.textContent = '🎙️';
+    voiceBtn.title = 'Registrar por voz';
+  };
+
+  recognition.onerror = (event) => {
+    const msg = event.error === 'not-allowed'
+      ? 'Permiso de micrófono denegado'
+      : event.error === 'no-speech'
+        ? 'No se escuchó nada. Intenta de nuevo'
+        : 'No se pudo usar el micrófono';
+    showToast(msg);
+    if (recognition) recognition.stop();
+  };
+
+  recognition.onresult = (event) => {
+    const finalTranscript = Array.from(event.results)
+      .filter(result => result.isFinal)
+      .map(result => result[0].transcript)
+      .join(' ')
+      .trim();
+
+    if (finalTranscript) {
+      handleVoiceTranscript(finalTranscript);
+    }
+  };
+}
+
+function handleVoiceTranscript(transcript){
+  const text = normalizeText(transcript);
+
+  const chapetaMatch = text.match(/(?:chapeta|numero de chapeta)\s*[:\-]?\s*([a-z]{1,3}[- ]?\d{3,})/) ||
+    text.match(/\b([a-z]{1,3}[- ]?\d{3,})\b/);
+  if (chapetaMatch) {
+    const chapeta = chapetaMatch[1].replace(/\s+/g, '-').toUpperCase();
+    document.getElementById('in-chapeta').value = chapeta;
+  }
+
+  const nombreMatch = text.match(/(?:nombre|alias|llamado|llama)\s+(.+?)(?=(?:finca|raza|sexo|peso|estado|registrar|guardar|$))/i);
+  if (nombreMatch) {
+    document.getElementById('in-nombre').value = nombreMatch[1].trim();
+  }
+
+  const fincaMap = {
+    'la esperanza': 'La Esperanza',
+    'el roble': 'El Roble',
+    'santa rita': 'Santa Rita',
+    'los naranjos': 'Los Naranjos'
+  };
+  const fincaKey = Object.keys(fincaMap).find(key => text.includes(key));
+  if (fincaKey) {
+    document.getElementById('in-finca').value = fincaMap[fincaKey];
+  }
+
+  const razaMatch = text.match(/(?:raza|tipo)\s+(.+?)(?=(?:sexo|peso|estado|registrar|guardar|$))/i);
+  if (razaMatch) {
+    document.getElementById('in-raza').value = razaMatch[1].trim();
+  }
+
+  if (text.includes('macho') || text.includes('varon') || text.includes('varón')) {
+    document.getElementById('in-sexo').value = 'M';
+  } else if (text.includes('hembra')) {
+    document.getElementById('in-sexo').value = 'H';
+  }
+
+  const pesoMatch = text.match(/(?:peso)\s*[:\-]?\s*(\d+(?:\.\d+)?)/i);
+  if (pesoMatch) {
+    document.getElementById('in-peso').value = pesoMatch[1];
+  }
+
+  if (text.includes('sano') || text.includes('saludable')) {
+    document.getElementById('in-estado').value = 'Sano';
+  } else if (text.includes('tratamiento') || text.includes('en tratamiento')) {
+    document.getElementById('in-estado').value = 'Tratamiento';
+  } else if (text.includes('cuarentena')) {
+    document.getElementById('in-estado').value = 'Cuarentena';
+  }
+
+  if (/(registrar|guardar|agregar|crear).*(animal|registro)/.test(text) || text.includes('registrar animal') || text.includes('guardar animal')) {
+    const chapeta = document.getElementById('in-chapeta').value.trim();
+    const finca = document.getElementById('in-finca').value;
+    const sexo = document.getElementById('in-sexo').value;
+    const estado = document.getElementById('in-estado').value;
+    if (chapeta && finca && sexo && estado) {
+      form.requestSubmit();
+    } else {
+      showToast('Faltan datos para registrar');
+    }
+  }
+}
+
+function toggleVoiceCapture(){
+  initVoiceRecognition();
+  if (!recognition) {
+    return;
+  }
+  if (isListening) {
+    recognition.stop();
+    return;
+  }
+
+  openModal();
+  try {
+    recognition.start();
+  } catch (error) {
+    showToast('No se pudo iniciar el micrófono');
+  }
+}
+
 [searchInput, filterFinca, filterSexo, filterEstado].forEach(el => {
   el.addEventListener('input', render);
   el.addEventListener('change', render);
@@ -122,6 +271,7 @@ function closeModal(){
 }
 
 document.getElementById('openModalBtn').addEventListener('click', openModal);
+voiceBtn.addEventListener('click', toggleVoiceCapture);
 document.getElementById('cancelBtn').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
 document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
