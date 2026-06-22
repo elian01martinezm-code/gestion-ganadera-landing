@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Si quieres personalizar fuentes o colores globalmente, hazlo aquí directamente */
+@theme {
+  --font-sans: "DM Sans", sans-serif;
+}

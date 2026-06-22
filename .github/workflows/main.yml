@@ -1,0 +1,25 @@
+name: CI Gestión Ganadera
+
+on:
+  push:
+    branches: [ main, feature/login ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+      
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Instalar Tailwind CSS localmente
+        run: npm install tailwindcss @tailwindcss/cli
+
+      - name: Construir CSS
+        run: npx tailwindcss -i ./src/input.css -o ./dist/output.css
